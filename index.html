@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pucca ♡ Yoko & Al2</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:#090308;color:#fff;
+  font-family:Georgia,serif;overflow-x:hidden
+}
+#stars{position:fixed;inset:0;z-index:-3}
+.bg{
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(255,70,130,.18),transparent 35%),
+    radial-gradient(circle at 15% 80%,rgba(120,80,255,.14),transparent 30%),
+    #090308
+}
+
+/* BARRA DE NAVEGACIÓN ESTILO SITIO WEB MODERNO */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;height:65px;
+  background:rgba(9, 3, 8, 0.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255, 177, 208, 0.2);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 35px;z-index:900;
+}
+.nav-logo{
+  font-size:18px;color:#ffb1d0;font-style:italic;
+  letter-spacing:1px;text-decoration:none;display:flex;align-items:center;gap:8px;
+}
+.nav-links{
+  display:flex;gap:20px;list-style:none;margin:0;padding:0;
+}
+.nav-links a{
+  color:#fff;text-decoration:none;font:11px Arial,sans-serif;
+  letter-spacing:1.5px;opacity:0.75;transition:0.3s;
+  text-transform:uppercase;
+}
+.nav-links a:hover{
+  opacity:1;color:#ff8fc8;
+  text-shadow:0 0 10px rgba(255,79,155,0.6);
+}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  justify-content:center;text-align:center;padding:100px 25px 25px
+}
+.wrap{width:min(1000px,94vw)}
+.tag{
+  font:11px Arial,sans-serif;letter-spacing:5px;
+  text-transform:uppercase;opacity:.8
+}
+h1{
+  font-size:clamp(90px,18vw,190px);font-weight:400;
+  line-height:.78;margin:28px 0 35px;
+  background:linear-gradient(110deg,#fff,#ffb1d0,#fff);
+  -webkit-background-clip:text;color:transparent
+}
+.quote{
+  font-size:clamp(20px,3vw,32px);
+  font-style:italic;line-height:1.5;opacity:.95
+}
+
+/* BOTONES DECORADOS Y ELEVADOS */
+.btn{
+  margin-top:28px;padding:16px 36px;
+  border:1.5px solid rgba(255,143,200,0.6);border-radius:99px;
+  background:linear-gradient(135deg, rgba(255,79,155,0.3), rgba(120,80,255,0.3));
+  color:#fff;font:13px Arial,sans-serif;letter-spacing:2.5px;
+  cursor:pointer;transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:0 0 25px rgba(255,79,155,0.3), inset 0 0 12px rgba(255,143,200,0.2);
+  text-transform:uppercase;position:relative;overflow:hidden;
+}
+.btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(rgba(255,255,255,0.25), transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  background:linear-gradient(135deg, rgba(255,79,155,0.5), rgba(120,80,255,0.5));
+  border-color:#ffb1d0;
+  box-shadow:0 0 35px rgba(255,79,155,0.6), inset 0 0 20px rgba(255,143,200,0.4);
+}
+.btn:hover::after{opacity:1}
+
+.hidden{display:none}
+
+/* SECCIONES FLUIDAS (ESTILO PERGAMINO MODERNO) */
+.section{
+  padding:110px 20px;text-align:center;
+  max-width:900px;margin:0 auto;
+  scroll-margin-top:70px;
+  border-bottom:1px solid rgba(255,177,208,0.08);
+}
+.title{
+  font-size:clamp(35px,6vw,68px);
+  font-weight:400;margin:18px 0
+}
+.line{height:1px;width:70px;background:#ffb1d066;margin:25px auto}
+.msg{
+  font-size:clamp(18px,2.8vw,26px);
+  font-style:italic;line-height:1.7;
+  max-width:780px;margin:auto;opacity:.95
+}
+input{
+  margin:40px auto 12px;display:block;
+  width:min(520px,90%);padding:18px;
+  border:1.5px dashed rgba(255,143,200,0.45);border-radius:18px;
+  background:rgba(255,255,255,0.04);color:#ddd;
+  cursor:pointer;transition:0.3s;
+}
+input:hover{background:rgba(255,255,255,0.08);border-color:#ff8fc8}
+.help{font:12px Arial;opacity:.6;line-height:1.6}
+
+/* GALERÍA PERMANENTE: carpeta Recuerdos */
+#gallery{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;margin-top:45px;
+}
+.memory-item{
+  position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;
+  cursor:pointer;border:1px solid rgba(255,143,184,.25);
+  background:linear-gradient(145deg,rgba(100,19,49,.24),rgba(8,3,13,.92));
+  box-shadow:0 10px 28px rgba(0,0,0,.25);
+  opacity:0;animation:showMemory .55s ease forwards;
+}
+.memory-item img,.memory-item video{
+  width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;
+}
+.memory-item:hover img,.memory-item:hover video{transform:scale(1.05)}
+.memory-number{
+  position:absolute;left:10px;top:10px;z-index:2;padding:5px 9px;border-radius:999px;
+  background:rgba(8,2,7,.72);border:1px solid rgba(255,177,208,.28);
+  color:#ffe0eb;font:10px Arial,sans-serif;letter-spacing:1px;backdrop-filter:blur(6px);
+}
+@keyframes showMemory{to{opacity:1}}
+@media(max-width:900px){#gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){#gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.memory-item{border-radius:15px}}
+
+/* CONTADOR DE TIEMPO */
+.timer-container{
+  display:flex;justify-content:center;gap:15px;
+  margin-top:35px;flex-wrap:wrap
+}
+.timer-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,177,208,0.3);
+  padding:16px 22px;border-radius:18px;
+  min-width:95px;
+  box-shadow:0 0 20px rgba(255,79,155,0.1)
+}
+.timer-num{
+  font-size:clamp(24px,4vw,38px);
+  font-weight:bold;color:#ffb1d0
+}
+.timer-label{
+  font:11px Arial,sans-serif;
+  text-transform:uppercase;letter-spacing:2px;
+  opacity:.7;margin-top:5px
+}
+
+/* MARCO ESTILIZADO CON RESPLANDOR */
+.final-img-container{
+  width:min(340px,85vw);margin:35px auto 20px;
+  border-radius:20px;overflow:hidden;
+  border:1.5px solid rgba(255,79,155,0.4);
+  box-shadow:0 0 25px rgba(255,79,155,0.25), 0 10px 30px rgba(0,0,0,0.7);
+  transition:transform .4s ease;
+}
+.final-img-container:hover{transform:scale(1.03)}
+.final-img-container img{width:100%;height:auto;display:block}
+
+/* PREGUNTA INTERACTIVA */
+.question-box{
+  position:relative;margin:40px auto 0;
+  max-width:500px;min-height:110px;
+  display:flex;justify-content:center;
+  align-items:center;gap:20px;flex-wrap:wrap
+}
+.btn-yes{
+  background:linear-gradient(135deg, rgba(255,79,155,0.55), rgba(255,143,200,0.55)) !important;
+  border-color:#ff4f9b !important;font-weight:bold
+}
+.btn-no{position:relative;transition:all 0.2s ease}
+
+.end{
+  min-height:90vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:70px 20px;max-width:900px;margin:0 auto;
+}
+.heart{font-size:65px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.14)}}
+
+.light{
+  position:fixed;inset:0;background:#000e;z-index:2000;
+  display:none;align-items:center;justify-content:center
+}
+.light.show{display:flex}
+.light img, .light video{max-width:93%;max-height:88%;border-radius:14px}
+.close{
+  position:absolute;right:25px;top:15px;
+  font:35px Arial;cursor:pointer;z-index:30
+}
+
+/* BOTÓN DE MÚSICA */
+.music-container{
+  position:fixed;bottom:25px;right:25px;
+  display:flex;align-items:center;gap:12px;
+  z-index:1000;
+}
+.music-title-tag{
+  background:rgba(20, 10, 20, 0.85);
+  border:1px solid rgba(255, 143, 200, 0.4);
+  color:#ffb1d0;padding:8px 16px;border-radius:20px;
+  font:13px Arial, sans-serif;letter-spacing:1px;
+  box-shadow:0 0 15px rgba(255,79,155,0.2);
+  opacity:0;transform:translateX(15px);
+  transition:all 0.4s ease;pointer-events:none;
+  white-space:nowrap;backdrop-filter:blur(5px);
+}
+.music-container.playing .music-title-tag{
+  opacity:1;transform:translateX(0);
+}
+.music-btn{
+  position:relative;
+  background:linear-gradient(135deg, rgba(255, 79, 155, 0.25), rgba(120, 80, 255, 0.25));
+  color:#fff;
+  border:1.5px solid rgba(255, 177, 208, 0.6);
+  border-radius:50%;width:58px;height:58px;
+  font-size:24px;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;
+  transition:all .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:0 0 20px rgba(255, 79, 155, 0.3);
+  backdrop-filter:blur(5px);
+}
+.music-btn:hover{
+  transform:scale(1.12);
+  border-color:#ff8fc8;
+  box-shadow:0 0 30px rgba(255, 79, 155, 0.6);
+}
+.music-container.playing .music-btn{
+  background:linear-gradient(135deg, rgba(255, 79, 155, 0.55), rgba(255, 143, 200, 0.4));
+  border-color:#fff;
+  animation:musicGlow 2s infinite alternate;
+}
+@keyframes musicGlow{
+  0%{box-shadow:0 0 15px #ff4f9b88;}
+  100%{box-shadow:0 0 25px #ff4f9bbb;}
+}
+
+/* NOTAS Y CORAZONES FLOTANTES */
+.floating-note{
+  position:fixed;pointer-events:none;
+  font-size:18px;color:#ff8fc8;
+  text-shadow:0 0 8px #ff4f9b;
+  animation:floatMusic 2s forwards linear;
+  z-index:999;
+}
+@keyframes floatMusic{
+  0%{opacity:1;transform:translate(0, 0) scale(0.7) rotate(0deg)}
+  50%{opacity:0.8;transform:translate(-25px, -60px) scale(1.2) rotate(-15deg)}
+  100%{opacity:0;transform:translate(15px, -130px) scale(0.9) rotate(20deg)}
+}
+.click-heart{
+  position:fixed;pointer-events:none;
+  font-size:24px;color:#ff8fc8;
+  text-shadow:0 0 10px #ff4f9b;
+  animation:floatHeart 1.2s forwards ease-out;
+  z-index:9999
+}
+@keyframes floatHeart{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(0.6)}
+  50%{transform:translate(-50%,-100px) scale(1.3)}
+  100%{opacity:0;transform:translate(-50%,-160px) scale(1)}
+}
+
+/* CARTA ANIMADA */
+.letter-area{margin:45px auto 0;max-width:650px}
+.envelope{
+  position:relative;width:min(330px,85vw);height:220px;
+  margin:0 auto;cursor:pointer;perspective:1000px
+}
+.envelope-back{
+  position:absolute;inset:0;background:linear-gradient(145deg,#7b234c,#3c102d);
+  border-radius:12px;box-shadow:0 12px 35px #0008
+}
+.envelope-flap{
+  position:absolute;top:0;left:0;width:100%;height:58%;
+  background:#a63b68;clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;transition:transform .8s ease;z-index:3
+}
+.envelope-front{
+  position:absolute;inset:0;
+  background:linear-gradient(145deg,#9e315e,#551532);
+  clip-path:polygon(0 42%,50% 100%,100% 42%,100% 100%,0 100%);
+  border-radius:12px;z-index:4
+}
+.envelope-heart{
+  position:absolute;z-index:5;left:50%;top:45%;
+  transform:translate(-50%,-50%);font-size:38px;
+  transition:opacity .3s
+}
+.letter-paper{
+  position:absolute;left:8%;width:84%;bottom:8px;
+  min-height:205px;padding:24px 20px;
+  background:#fff1e8;color:#4a1930;
+  border-radius:8px;z-index:2;
+  transform:translateY(0);transition:transform .8s ease;
+  opacity:0;text-align:center
+}
+.letter-paper h3{margin:0 0 12px;font-size:24px;font-weight:400}
+.letter-paper p{font-size:16px;line-height:1.65;margin:0}
+.envelope.open .envelope-flap{
+  transform:translateY(-135px) rotateX(8deg);
+  opacity:0;pointer-events:none;z-index:1
+}
+.envelope.open .letter-paper{
+  transform:translateY(-165px);
+  opacity:1;z-index:6;
+  box-shadow:0 8px 24px rgba(0,0,0,.28)
+}
+.envelope.open .envelope-front{z-index:3}
+.envelope.open .envelope-heart{opacity:0}
+.letter-help{font:12px Arial;opacity:.6;margin-top:25px}
+
+/* MENSAJE SECRETO */
+.secret-box{margin:45px auto 0;max-width:700px}
+.secret-message{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height 1s ease,opacity .8s ease,margin .8s ease;
+  margin:0 auto;max-width:650px
+}
+.secret-message.revealed{
+  max-height:500px;opacity:1;margin-top:30px
+}
+.secret-card{
+  padding:30px 24px;border:1px solid #ffb1d044;
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,79,155,0.08));
+  box-shadow:0 0 35px #ff4f9b12
+}
+.secret-card p{font-size:clamp(19px,3vw,27px);line-height:1.7;font-style:italic}
+
+/* TARJETAS DE HISTORIA */
+.story-card{
+  max-width:760px;margin:35px auto 0;
+  padding:35px 28px;border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,79,155,0.07));
+  border:1px solid rgba(255,177,208,0.25);
+  box-shadow:0 0 30px rgba(255,79,155,0.12);
+  text-align:left
+}
+.story-card p{
+  font-size:clamp(17px,2.5vw,22px);
+  line-height:1.8;font-style:italic;
+  opacity:.95;margin-bottom:18px
+}
+.story-card p:last-child{margin-bottom:0}
+
+/* CORAZONES INTERACTIVOS */
+.interactive-sky{
+  position:relative;width:min(1000px,94vw);min-height:430px;
+  margin:45px auto 0;padding:35px 20px 25px;
+  overflow:hidden;border:1px solid #ff8fc533;border-radius:25px;
+  background:radial-gradient(circle at 50% 20%,#6d174855,transparent 45%),#09050e;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:28px 18px;align-items:start
+}
+.heart-choice{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;gap:14px;min-width:0
+}
+.heart-button{
+  border:0;background:transparent;color:#ff8fc8;
+  font-size:58px;line-height:1;cursor:pointer;
+  text-shadow:0 0 8px #ff4f9b,0 0 24px #ff4f9b99;
+  transition:transform .3s;
+}
+.heart-button:hover,.heart-button.active{transform:scale(1.18)}
+.heart-message{
+  display:none;width:100%;min-height:112px;
+  padding:17px 13px;border:1px solid #ff67b8aa;
+  border-radius:16px;background:#08030de8;
+  color:#ffe4f1;font-size:16px;font-style:italic;line-height:1.5;text-align:center
+}
+.heart-message.show{
+  display:flex;align-items:center;justify-content:center;
+  animation:messageIn .35s ease
+}
+@keyframes messageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.heart-hint{font:12px Arial;opacity:.65;margin-top:20px}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .navbar{justify-content:center}
+  #gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .music-title-tag{display:none}
+}
+
+/* ===== PUCCA ROMANTICA / YOKO ===== */
+:root{--wine:#641331;--cherry:#d92f68;--rose:#ff8fb8;--soft:#ffd7e6;--gold:#e7b88b}
+body{background:radial-gradient(circle at 10% 15%,rgba(217,47,104,.10),transparent 28%),radial-gradient(circle at 90% 80%,rgba(231,184,139,.08),transparent 24%),#080207}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.16;background-image:radial-gradient(circle,#ffd7e6 0 1px,transparent 1.5px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+.navbar{height:72px;padding:0 clamp(16px,4vw,52px);background:linear-gradient(90deg,rgba(8,2,7,.96),rgba(48,8,27,.88),rgba(8,2,7,.96));border-bottom:1px solid rgba(255,143,184,.28)}
+.nav-logo{font-size:20px;color:var(--soft);text-shadow:0 0 16px rgba(217,47,104,.5)}
+.hero{position:relative;overflow:hidden}.hero:after{content:"🎀";position:absolute;right:8%;bottom:13%;font-size:clamp(38px,7vw,90px);opacity:.12;transform:rotate(18deg);filter:grayscale(1)}
+h1{letter-spacing:-7px;text-shadow:0 0 35px rgba(217,47,104,.2)}.quote{max-width:760px;margin:auto;color:#ffe9f1}
+.btn{background:linear-gradient(135deg,rgba(112,18,53,.82),rgba(217,47,104,.25));border-color:rgba(255,143,184,.72);box-shadow:0 0 26px rgba(217,47,104,.20),inset 0 0 15px rgba(255,143,184,.08)}
+.btn:hover{background:linear-gradient(135deg,rgba(217,47,104,.55),rgba(100,19,49,.8))}.title{color:#ffe7f0;text-shadow:0 0 24px rgba(217,47,104,.14)}.line{width:110px;background:linear-gradient(90deg,transparent,var(--cherry),var(--gold),transparent)}
+.story-card,.secret-card{background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(100,19,49,.16));border-color:rgba(255,143,184,.23);box-shadow:0 18px 50px rgba(0,0,0,.25),0 0 30px rgba(217,47,104,.08)}
+.timer-box{background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(100,19,49,.18));border-color:rgba(255,143,184,.27)}.timer-num{color:var(--soft);text-shadow:0 0 15px rgba(217,47,104,.3)}
+.photo{border-radius:20px;border-color:rgba(255,143,184,.28);box-shadow:0 8px 25px rgba(0,0,0,.25)}.interactive-sky{background:radial-gradient(circle at 50% 0%,rgba(217,47,104,.2),transparent 45%),linear-gradient(145deg,rgba(100,19,49,.22),rgba(8,5,14,.96));border-color:rgba(255,143,184,.28)}
+.heart-button{color:var(--rose);text-shadow:0 0 8px var(--cherry),0 0 28px rgba(217,47,104,.65)}.heart-message{background:linear-gradient(145deg,rgba(8,3,13,.95),rgba(100,19,49,.35));border-color:rgba(255,143,184,.55)}
+.envelope-back{background:linear-gradient(145deg,#7b234c,#250817)}.envelope-flap{background:linear-gradient(145deg,#b94a79,#7b234c)}.envelope-front{background:linear-gradient(145deg,#a83a68,#3a0d25)}.letter-paper{background:linear-gradient(145deg,#fff5ed,#ffdce9)}
+.music-btn{background:linear-gradient(135deg,rgba(100,19,49,.85),rgba(217,47,104,.45));border-color:rgba(255,215,230,.7)}.music-title-tag{background:rgba(26,5,17,.92);border-color:rgba(255,143,184,.45)}
+.final-img-container{border-color:rgba(255,143,184,.5);box-shadow:0 0 40px rgba(217,47,104,.2),0 18px 45px rgba(0,0,0,.65)}.end .heart{color:var(--rose);text-shadow:0 0 25px rgba(217,47,104,.8)}
+@media(max-width:768px){.navbar{height:62px}.hero{padding-top:95px}h1{letter-spacing:-3px}.section{padding:90px 18px}}
+
+
+/* ===== DISTRIBUCIÓN TIPO PANEL DE TARJETAS (INSPIRADA EN EL VIDEO) ===== */
+:root{
+  --panel-bg:rgba(23,30,100,.58);
+  --panel-border:rgba(120,145,255,.52);
+  --panel-blue:#233fb8;
+  --panel-purple:#d66bff;
+}
+#chapter-menu{
+  width:min(1180px,94vw);
+  margin:0 auto 30px;
+  padding:55px 10px 25px;
+  text-align:center;
+}
+#chapter-menu .menu-kicker{
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,rgba(214,107,255,.25),rgba(93,135,255,.25));
+  border:1px solid rgba(214,107,255,.5);
+  color:#ffd5f2;
+  font:700 11px Arial,sans-serif;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+}
+#chapter-menu h2{
+  margin:22px auto 12px;
+  font-size:clamp(34px,5vw,66px);
+  line-height:1.05;
+  font-weight:400;
+  background:linear-gradient(100deg,#ff9bdc,#f6c1ff,#ffd68c);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+#chapter-menu p{
+  margin:0 auto 30px;
+  max-width:700px;
+  color:#b8c9ff;
+  font:15px/1.7 Arial,sans-serif;
+}
+.chapter-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.chapter-card{
+  position:relative;
+  min-height:175px;
+  padding:25px 18px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  text-decoration:none;
+  color:#fff;
+  border:1px solid var(--panel-border);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(100,123,255,.18),transparent 65%),
+    linear-gradient(145deg,rgba(28,43,153,.82),rgba(20,20,83,.82));
+  box-shadow:inset 0 0 18px rgba(95,130,255,.08),0 10px 28px rgba(0,0,0,.22);
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.chapter-card:hover{
+  transform:translateY(-5px);
+  border-color:#d7b4ff;
+  box-shadow:0 0 25px rgba(115,130,255,.28),0 14px 35px rgba(0,0,0,.28);
+}
+.chapter-card .card-icon{
+  font-size:30px;
+  filter:drop-shadow(0 0 10px rgba(255,125,220,.35));
+}
+.chapter-card strong{
+  font:700 18px Georgia,serif;
+  color:#f8eaff;
+}
+.chapter-card small{
+  color:#b8c9ff;
+  font:11px/1.5 Arial,sans-serif;
+  letter-spacing:.4px;
+}
+.chapter-card .card-number{
+  position:absolute;
+  top:10px;
+  right:13px;
+  color:rgba(221,208,255,.65);
+  font:10px Arial,sans-serif;
+}
+#main>.section{
+  width:min(1180px,94vw);
+  max-width:none;
+  margin:0 auto 28px;
+  padding:55px clamp(18px,4vw,50px);
+  border:1px solid rgba(110,130,255,.22);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(70,91,220,.09),transparent 55%),
+    linear-gradient(145deg,rgba(12,18,70,.35),rgba(10,5,27,.45));
+}
+#main>.section .title{
+  font-size:clamp(30px,4.5vw,58px);
+}
+#main>.section .story-card,
+#main>.section .secret-card{
+  border-radius:18px;
+}
+#main>.end{
+  width:min(1180px,94vw);
+  margin:0 auto;
+  padding:75px 20px 110px;
+}
+#main>.section:nth-of-type(odd){
+  border-color:rgba(214,107,255,.24);
+}
+#main>.section:nth-of-type(even){
+  border-color:rgba(92,139,255,.28);
+}
+@media(max-width:950px){
+  .chapter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+  #chapter-menu{padding-top:35px}
+  .chapter-grid{grid-template-columns:1fr}
+  .chapter-card{min-height:135px}
+  #main>.section{padding:38px 16px}
+}
+
+</style>
+</head>
+
+<body>
+<canvas id="stars"></canvas>
+<div class="bg"></div>
+
+<!-- BARRA DE NAVEGACIÓN WEB MODERNA -->
+<nav class="navbar">
+  <a href="#inicio" class="nav-logo">🎀 Pucca ♡</a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#capitulo1">Contador</a></li>
+    <li><a href="#conociste">Cómo te conocí</a></li>
+    <li><a href="#recuerdos">Recuerdos</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#razones">Razones</a></li>
+    <li><a href="#propuesta">Propuesta</a></li>
+  </ul>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio" class="hero">
+  <div class="wrap">
+    <div class="tag">✦ YOKO · una historia para mi niña de cabello rojo ✦</div>
+    <div style="font:12px Arial,sans-serif;letter-spacing:4px;color:#e7b88b;margin-bottom:18px;">PARA LA DUEÑA DE MI CORAZÓN</div><h1>Pucca</h1>
+    <div class="quote">
+      “Entre tantas personas en el mundo, y con ese pelito rojo tan hermoso que me vuelve loco,<br>
+      yo tuve la suerte de encontrarte a ti.”
+    </div>
+    <button class="btn" onclick="openGift()">ABRIR MI REGALO ♡</button><div style="margin-top:22px;font:11px Arial,sans-serif;letter-spacing:2px;opacity:.55;">♫ YOKO — ÁLVARO DÍAZ</div>
+  </div>
+</section>
+
+<main id="main" class="hidden">
+
+  <section id="chapter-menu" aria-label="Menú de capítulos">
+    <div class="menu-kicker">♡ TODO ESTO FUE HECHO PARA TI ♡</div>
+    <h2>Mi pequeña historia contigo</h2>
+    <p>
+      Cada tarjeta te llevará a una parte diferente de este regalo.
+      No tienes que verlo todo de golpe; puedes recorrerlo a tu manera. ❤️
+    </p>
+    <div class="chapter-grid">
+      <a class="chapter-card" href="#capitulo1">
+        <span class="card-number">01</span>
+        <span class="card-icon">💗</span>
+        <strong>Para mi Puca</strong>
+        <small>El comienzo de este regalo</small>
+      </a>
+      <a class="chapter-card" href="#conociste">
+        <span class="card-number">02</span>
+        <span class="card-icon">✨</span>
+        <strong>El inicio de todo</strong>
+        <small>Cómo comenzó nuestra historia</small>
+      </a>
+      <a class="chapter-card" href="#recuerdos">
+        <span class="card-number">03</span>
+        <span class="card-icon">📸</span>
+        <strong>Tus recuerdos</strong>
+        <small>Momentos que quiero guardar</small>
+      </a>
+      <a class="chapter-card" href="#carta">
+        <span class="card-number">04</span>
+        <span class="card-icon">💌</span>
+        <strong>Una carta para ti</strong>
+        <small>Palabras escritas con amor</small>
+      </a>
+      <a class="chapter-card" href="#secreto">
+        <span class="card-number">05</span>
+        <span class="card-icon">🔐</span>
+        <strong>Hay algo más</strong>
+        <small>Un mensaje para descubrir</small>
+      </a>
+      <a class="chapter-card" href="#historia">
+        <span class="card-number">06</span>
+        <span class="card-icon">🌙</span>
+        <strong>El día que lo supiste</strong>
+        <small>Un recuerdo especial</small>
+      </a>
+      <a class="chapter-card" href="#razones">
+        <span class="card-number">07</span>
+        <span class="card-icon">❤️</span>
+        <strong>Mis razones</strong>
+        <small>Nueve detalles sobre ti</small>
+      </a>
+      <a class="chapter-card" href="#propuesta">
+        <span class="card-number">08</span>
+        <span class="card-icon">🌹</span>
+        <strong>Una oportunidad</strong>
+        <small>Lo que todavía siento</small>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- CAPÍTULO I -->
+  <section id="capitulo1" class="section">
+    <div class="tag">capítulo I</div>
+    <h2 class="title">Para mi pequeña Puca 🎀</h2><div style="font-size:12px;letter-spacing:3px;color:#e7b88b;">MI PERSONA FAVORITA</div>
+    <div class="line"></div>
+    <p class="msg">
+      Hice este pequeño rincón pensando en ti.<br>
+      Porque cada detalle aquí guardado lleva todo el amor que tengo por ti.
+    </p>
+
+    <div class="timer-container">
+      <div class="timer-box">
+        <div class="timer-num" id="dias">0</div>
+        <div class="timer-label">Días</div>
+      </div>
+      <div class="timer-box">
+        <div class="timer-num" id="horas">0</div>
+        <div class="timer-label">Horas</div>
+      </div>
+      <div class="timer-box">
+        <div class="timer-num" id="minutos">0</div>
+        <div class="timer-label">Minutos</div>
+      </div>
+      <div class="timer-box">
+        <div class="timer-num" id="segundos">0</div>
+        <div class="timer-label">Segundos</div>
+      </div>
+    </div>
+    <div class="help" style="margin-top:18px; font-size:14px; font-style:italic;">
+      Desde aquel 5 de agosto a las 10:00 PM cuando me diste tu liga de cabello y empezó nuestra historia ❤️
+    </div>
+  </section>
+
+  <!-- CAPÍTULO II: CÓMO LA CONOCÍ -->
+  <section id="conociste" class="section">
+    <div class="tag">capítulo II</div>
+    <h2 class="title">El inicio de todo 💫</h2>
+    <div class="line"></div>
+    <div class="story-card">
+      <p>Aún recuerdo perfectamente cuando te conocí. Pasé de noche aquella vez por la academia y te asusté, sin imaginar que esa pequeña casualidad cambiaría mi vida por completo.</p>
+      <p>Desde ese instante supe que tenías algo único y especial, y verte sonreír se convirtió en mi parte favorita de todos los días. ❤️</p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO III: RECUERDOS -->
+  <section id="recuerdos" class="section">
+    <div class="tag">capítulo III</div>
+    <h2 class="title">Tus recuerdos 📸</h2><div style="font-size:12px;letter-spacing:2px;color:#ffb1d0;">PEQUEÑOS MOMENTOS, GRANDES SENTIMIENTOS</div>
+    <div class="line"></div>
+    <p class="msg">Cada foto y video guarda un pedacito de ti y de nuestra historia.</p>
+
+    <div class="help" style="margin-top:28px;">Aquí están guardados tus recuerdos. La página carga automáticamente los archivos de la carpeta <strong>Recuerdos</strong>.</div>
+
+    <div id="gallery"></div>
+  </section>
+
+  <!-- CAPÍTULO IV: CARTA ANIMADA -->
+  <section id="carta" class="section">
+    <div class="tag">capítulo IV</div>
+    <h2 class="title">Una carta para ti 💌</h2>
+    <div class="line"></div>
+    <p class="msg">Hay cosas que a veces no sé cómo decirte, así que decidí escribirlas aquí.</p>
+
+    <div class="letter-area">
+      <div class="envelope" id="envelope" onclick="toggleLetter()">
+        <div class="envelope-back"></div>
+        <div class="letter-paper">
+          <h3>Para mi Puca, con mucho amor ❤️</h3>
+          <p>
+            Hay miradas que se quedan a vivir en la memoria, y la tuya se convirtió en mi favorita desde el primer instante. Tienes ese encanto en los ojos, en tu pelo rojo y en cada pequeño gesto que hace que el mundo se detenga un segundo. Escribo esto porque mi corazón no sabe olvidarte, y cada paso que doy sigue teniendo ganas de encontrarte a ti. ❤️
+          </p>
+        </div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-heart">♡</div>
+      </div>
+      <div class="letter-help">Haz clic en el sobre para abrir la carta.</div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO V: MENSAJE SECRETO -->
+  <section id="secreto" class="section">
+    <div class="tag">capítulo V</div>
+    <h2 class="title">Hay algo más...</h2>
+    <div class="line"></div>
+    <p class="msg">Si llegaste hasta aquí, todavía tengo algo que decirte.</p>
+
+    <div class="secret-box">
+      <button class="btn secret-btn" id="secret-button" onclick="revealSecret()">
+        ABRIR MENSAJE ♡
+      </button>
+
+      <div class="secret-message" id="secret-message">
+        <div class="secret-card">
+          <p>
+            A veces las palabras se quedan cortas para explicar todo lo que significas para mí. Hice esto porque mi corazón sigue guardando cada bonito recuerdo tuyo, y aunque el tiempo cambie, lo que siento por ti siempre será bonito y sincero. ❤️
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO VI: EL DÍA QUE LO SUPISTE -->
+  <section id="historia" class="section">
+    <div class="tag">capítulo VI</div>
+    <h2 class="title">El día que lo supiste 💖</h2>
+    <div class="line"></div>
+
+    <div class="story-card">
+      <p>Aún recuerdo aquella noche en la que salí de casa por unos problemas y terminé hablándote de todos los sentimientos que tenía guardados hacia ti, mi Pinki.</p>
+      
+      <p>¿Cómo no olvidar esa noche? Esa noche donde te dije que te amaba en secreto y me dormí nervioso sabiendo que te diste cuenta de que estaba enamorado de ti. Tampoco olvidaré que al día siguiente te vi en el parque y pude volver a hablar contigo sobre todo lo que sentía.</p>
+
+      <p>Aún recuerdo la despedida: fue el primer beso que me diste, un beso en el cachete que aceleró mi corazón tanto que desde ese momento no pude volver a retener mis sentimientos hacia ti, así que solo decidí soltarlos.</p>
+
+      <p style="text-align:center; font-weight:bold; color:#ffb1d0; margin-top:25px;">
+        Muchas gracias por corregirme cuando hago mal las cosas, gracias por estar conmigo.<br>
+        ¡Mi Pucca, te amo mucho mi Pinki amor! ❤️
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO VII: RAZONES -->
+  <section id="razones" class="section">
+    <div class="tag">capítulo VII</div>
+    <h2 class="title">Mis razones para amarte ♡</h2><div style="font-size:12px;letter-spacing:2px;color:#e7b88b;">NUEVE DETALLES QUE ME HACEN PENSAR EN TI</div>
+    <div class="line"></div>
+    <p class="msg">No son muchas, pero todas son reales... Toca cada corazón para descubrirlas.</p>
+
+    <div class="interactive-sky" id="interactive-sky">
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(1,this)">♥</button>
+        <div class="heart-message" id="heart-message-1">No sabes cuánto me alegra haber pasado de noche aquella vez por la academia y haberte asustado.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(2,this)">♥</button>
+        <div class="heart-message" id="heart-message-2">Me alegra haberte dado mi casaca aunque no la tengas.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(3,this)">♥</button>
+        <div class="heart-message" id="heart-message-3">No sabes la suerte tan inmensa que tengo de tenerte a mi lado.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(4,this)">♥</button>
+        <div class="heart-message" id="heart-message-4">Siempre eres y serás el primer pensamiento al levantarme.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(5,this)">♥</button>
+        <div class="heart-message" id="heart-message-5">Cada vez que miro esos ojos me hace ver toda una vida a tu lado.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(6,this)">♥</button>
+        <div class="heart-message" id="heart-message-6">Ese pelo rojo tan hermoso que me vuelve loco.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(7,this)">♥</button>
+        <div class="heart-message" id="heart-message-7">Eres la mujer de mi vida.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(8,this)">♥</button>
+        <div class="heart-message" id="heart-message-8">No quiero y no necesito a nadie más en mi vida teniéndote a ti.</div>
+      </div>
+      <div class="heart-choice">
+        <button class="heart-button" onclick="showHeartMessage(9,this)">♥</button>
+        <div class="heart-message" id="heart-message-9">Muchos te dirán de mil formas, pero para mí siempre serás mi Puca.</div>
+      </div>
+    </div>
+    <div class="heart-hint">♡ Haz clic en cada corazón ♡</div>
+  </section>
+
+  <!-- CAPÍTULO VIII: PROPUESTA -->
+  <section id="propuesta" class="section">
+    <div class="tag">capítulo VIII</div>
+    <h2 class="title">Una nueva oportunidad 🌹</h2>
+    <div class="line"></div>
+
+    <div class="story-card">
+      <p>Puca, llevo mucho tiempo con este sentimiento atrapado hacia ti. Desde que terminamos las cosas no fueron iguales. Si no hubiésemos vuelto a hablarnos no sé qué hubiera sido de mí, y no sabes cuánto te agradezco por eso.</p>
+      
+      <p>Quiero que sepas que esto no lo vi como una ruptura, sino como una oportunidad para conocerte mejor. Ahora por fin reuní el valor para decirte que siempre eres y serás mi primer pensamiento al levantarme, eres la razón por la cual yo sigo de pie, y créeme que siempre estás en mi corazón. No sé si te lo he dicho antes, pero no me preocupa, porque tengo toda una vida por delante para seguir demostrándotelo.</p>
+
+      <p>Puca, quiero decirte que te he echado mucho de menos, y créeme que no hay nada que me haga más feliz que podamos volver a intentarlo... quiero que vuelvas a ser mi Puca.</p>
+
+      <p>Entiendo que estás pasando por una etapa universitaria llena de problemas, no solo en la universidad sino también en tu casa, pero puedes estar segura de que siempre me tendrás a tu lado si me lo permites. No solo como tu novio, sino también como tu amigo, porque no tienes que cargar con todo sola... yo puedo cargarlo contigo.</p>
+
+      <p style="text-align:center; font-weight:bold; color:#ffb1d0; font-size: 21px; margin-top:25px;">
+        De esta forma quiero expresarte mi amor y me gustaría preguntarte...<br>
+        ¿Quieres volver a ser mi pequeña Puca? ❤️
+      </p>
+    </div>
+  </section>
+
+  <!-- CAPÍTULO FINAL -->
+  <section class="end">
+    <div class="heart">♡</div>
+    <div class="tag">capítulo final</div>
+    <h2 class="title">Una última pregunta...</h2>
+    <div class="line"></div>
+
+    <p class="msg" id="question-title">¿Siempre me harás caso y caminaremos juntos? 🥺</p>
+
+    <div class="question-box" id="q-box">
+      <button class="btn btn-yes" onclick="answerYes()">¡Sí, siempre! ❤️</button>
+      <button class="btn btn-no btn" id="btn-no" onmouseover="moveNo()" onclick="moveNo()">No 😜</button>
+    </div>
+
+    <div class="final-img-container" style="margin-top: 40px;">
+      <img src="fondo.jpg.jpeg" alt="El hilo rojo">
+    </div>
+
+    <p class="msg" style="font-size: 16px; opacity: 0.85; max-width: 520px; margin: 20px auto 10px; font-style: italic;">
+      “Un hilo rojo invisible conecta a aquellos que están destinados a encontrarse, sin importar el tiempo, el lugar ni las circunstancias.”
+    </p>
+
+    <p class="msg" style="margin-top:15px; font-weight: bold; font-size: 24px;">Tú y yo, siempre. ❤️</p>
+  </section>
+
+</main>
+
+<audio id="background-music" loop>
+  <source src="yoko.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-container" id="music-container">
+  <div class="music-title-tag">🎵 Sonando: Yoko</div>
+  <button id="music-toggle-btn" class="music-btn" aria-label="Reproducir música">💖</button>
+</div>
+
+<div class="light" id="light" onclick="closeImg()">
+  <div class="close">×</div>
+  <div id="light-content" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"></div>
+</div>
+
+<script>
+function openGift(){
+  document.getElementById('main').classList.remove('hidden');
+  setTimeout(()=>{
+    document.getElementById('capitulo1').scrollIntoView({behavior:'smooth'});
+  },100);
+}
+
+const gallery = document.getElementById('gallery');
+
+// Carga automáticamente fotos primero y deja todos los videos limpios al final.
+function loadPermanentGallery(){
+  gallery.innerHTML = '';
+  let delay = 0;
+
+  // Fase 1: Cargar solo fotos (jpeg)
+  for(let i = 1; i <= 112; i++){
+    addMemoryFile(i, 'jpeg', 'image/jpeg', delay);
+    delay += 0.01;
+  }
+
+  // Fase 2: Cargar solo videos (mp4) al final
+  for(let i = 1; i <= 112; i++){
+    addMemoryFile(i, 'mp4', 'video/mp4', delay);
+    delay += 0.015;
+  }
+}
+
+function addMemoryFile(number, extension, type, delay){
+  const src = `Recuerdos/foto (${number}).${extension}`;
+  const card = document.createElement('div');
+  card.className = 'memory-item';
+  card.style.animationDelay = `${delay}s`;
+
+  const numberTag = document.createElement('div');
+  numberTag.className = 'memory-number';
+  numberTag.textContent = `♡ ${number}`;
+  card.appendChild(numberTag);
+
+  if(type.startsWith('video/')){
+    const video = document.createElement('video');
+    video.src = src;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('aria-label', `Video recuerdo ${number}`);
+
+    video.onerror = () => card.remove();
+    video.onclick = (e) => { e.stopPropagation(); showModal(src, 'video'); };
+    card.appendChild(video);
+  }else{
+    const img = document.createElement('img');
+    img.src = src;
+    img.loading = 'lazy';
+    img.alt = `Recuerdo ${number}`;
+    img.onerror = () => card.remove();
+    img.onclick = (e) => { e.stopPropagation(); showModal(src, 'img'); };
+    card.appendChild(img);
+  }
+
+  gallery.appendChild(card);
+}
+
+loadPermanentGallery();
+
+function showModal(src, type) {
+  const lightContent = document.getElementById('light-content');
+  lightContent.innerHTML = '';
+  if (type === 'video') {
+    let bigVideo = document.createElement('video');
+    bigVideo.src = src; bigVideo.controls = true; bigVideo.autoplay = true;
+    lightContent.appendChild(bigVideo);
+  } else {
+    let bigImg = document.createElement('img');
+    bigImg.src = src;
+    lightContent.appendChild(bigImg);
+  }
+  document.getElementById('light').classList.add('show');
+}
+
+function closeImg(){
+  document.getElementById('light').classList.remove('show');
+  document.getElementById('light-content').innerHTML = '';
+}
+
+const c=document.getElementById('stars');
+const x=c.getContext('2d');
+let s=[];
+
+function resize(){
+  c.width=innerWidth*devicePixelRatio;
+  c.height=innerHeight*devicePixelRatio;
+  x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  s=Array.from({length:160},()=>({
+    x:Math.random()*innerWidth,
+    y:Math.random()*innerHeight,
+    r:.2+Math.random()*1.3,
+    a:Math.random(),
+    v:.002+Math.random()*.008
+  }));
+}
+
+function draw(){
+  x.clearRect(0,0,innerWidth,innerHeight);
+  s.forEach(p=>{
+    p.a+=p.v;
+    if(p.a>1||p.a<.15)p.v*=-1;
+    x.globalAlpha=p.a;
+    x.fillStyle='white';
+    x.beginPath();
+    x.arc(p.x,p.y,p.r,0,7);
+    x.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+onresize=resize;
+resize();
+draw();
+
+function toggleLetter(){
+  document.getElementById('envelope').classList.toggle('open');
+}
+
+function revealSecret(){
+  const message=document.getElementById('secret-message');
+  const button=document.getElementById('secret-button');
+  message.classList.toggle('revealed');
+  button.textContent = message.classList.contains('revealed') ? 'CERRAR MENSAJE ×' : 'ABRIR MENSAJE ♡';
+}
+
+function showHeartMessage(number,button){
+  const message=document.getElementById('heart-message-'+number);
+  const isVisible=message.classList.contains('show');
+  document.querySelectorAll('.heart-message').forEach(item=>item.classList.remove('show'));
+  document.querySelectorAll('.heart-button').forEach(item=>item.classList.remove('active'));
+  if(!isVisible){
+    message.classList.add('show');
+    button.classList.add('active');
+  }
+}
+
+const startDate = new Date('2026-08-05T22:00:00'); 
+function updateTimer() {
+  const now = new Date();
+  const diff = now - startDate;
+  if (diff < 0) return;
+  document.getElementById('dias').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById('horas').textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  document.getElementById('minutos').textContent = Math.floor((diff / 1000 / 60) % 60);
+  document.getElementById('segundos').textContent = Math.floor((diff / 1000) % 60);
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+window.addEventListener('click', (e) => {
+  if(e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || e.target.closest('.navbar')) return;
+  const heart = document.createElement('div');
+  heart.className = 'click-heart';
+  heart.innerHTML = '♥';
+  heart.style.left = e.clientX + 'px';
+  heart.style.top = e.clientY + 'px';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 1200);
+});
+
+function moveNo() {
+  const btnNo = document.getElementById('btn-no');
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  btnNo.style.position = 'fixed';
+  btnNo.style.left = `${x}px`;
+  btnNo.style.top = `${y}px`;
+}
+
+function answerYes() {
+  const qBox = document.getElementById('q-box');
+  const qTitle = document.getElementById('question-title');
+  qTitle.innerHTML = '¡Sabía que dirías que sí! 🥰❤️<br>Te amo muchísimo, mi Puca.';
+  qBox.style.display = 'none';
+  for (let i = 0; i < 70; i++) {
+    setTimeout(() => {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1500);
+    }, i * 40);
+  }
+}
+
+const audio = document.getElementById('background-music');
+const btn = document.getElementById('music-toggle-btn');
+const musicContainer = document.getElementById('music-container');
+let noteInterval = null;
+audio.volume = .6;
+
+function spawnFloatingNote() {
+  if (audio.paused) return;
+  const symbols = ['🎵', '🎶', '💖', '✨', '💕', '♩'];
+  const note = document.createElement('div');
+  note.className = 'floating-note';
+  note.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+  const rect = btn.getBoundingClientRect();
+  note.style.left = (rect.left + rect.width / 2) + 'px';
+  note.style.top = (rect.top + 10) + 'px';
+  document.body.appendChild(note);
+  setTimeout(() => note.remove(), 2000);
+}
+
+btn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().then(() => {
+      musicContainer.classList.add('playing');
+      btn.textContent = '💖';
+      noteInterval = setInterval(spawnFloatingNote, 450);
+    }).catch(e => console.log(e));
+  } else {
+    audio.pause();
+    musicContainer.classList.remove('playing');
+    btn.textContent = '🤍';
+    clearInterval(noteInterval);
+  }
+});
+</script>
+</body>
+</html>
